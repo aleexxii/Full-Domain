@@ -24,3 +24,28 @@ Task1(()=>{
         })
     })
 })
+
+// setTimeout
+
+setTimeout(()=>{
+    console.log('step one');
+    setTimeout(()=>{
+        console.log('step two ');
+        setTimeout(()=>{
+            console.log('step three');
+        },1000)
+    },1000)
+},1000)
+
+const abc = (msg, deley) => {
+    return new Promise((resolve)=>setTimeout(()=> resolve(msg),deley))
+}
+
+abc('task is running', 1000)
+    .then(result => {
+        console.log(result);
+        return abc('scond task is running', 1000)
+    })
+    .then(result => {
+        console.log(result);
+    })
