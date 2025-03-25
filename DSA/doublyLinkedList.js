@@ -12,27 +12,45 @@ class DoublyLinkedList{
         this.tail = null;
     }
 
-    insertAtEnd(element){
-        const node = new Node(element)
+    insertAtEnd(data){
+        const newNode = new Node(data)
         if(!this.head){
-            this.head = node;
-            this.tail = node;
-        }else{
-            node.prev = this.tail;
-            this.tail.next = node;
-            this.tail = node
+            this.head = newNode
+            this.tail = newNode;
+            return
         }
+        this.tail.next = newNode
+        newNode.prev = this.tail
+        this.tail = newNode
     }
-    insertAtStart(value){
-        const newNode = new Node(value)
+
+    insertAtStart(data){
+        const newNode = new Node(data)
         if(!this.head){
             this.head = newNode;
             this.tail = newNode;
-        }else{
-            newNode.next = this.head;
-            this.head.prev = newNode
-            this.head = newNode
+            return;
         }
+        newNode.next = this.head;
+        this.head.prev = newNode
+        this.head = newNode
+    }
+
+    deleteFromEnd(){
+        if(!this.tail){
+            return
+        }
+        let data = this.tail.value
+
+        if(this.head == this.tail){
+            this.tail = this.head = null
+        }else{
+            this.tail = this.tail.prev;
+            this.tail.next = null
+        }
+// returning deleted value
+        return data
+        
     }
 
     display(){
