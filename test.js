@@ -78,7 +78,7 @@ class Node3 {
   }
 }
 
-class BinaryTree {
+class BinarySearchTree {
   constructor() {
     this.root = null;
   }
@@ -105,6 +105,48 @@ class BinaryTree {
         current = current.right;
       } else {
         console.log("element is already exists");
+      }
+    }
+  }
+}
+
+// Binary Tree
+
+class Node4 {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinaryTree {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(value) {
+    const newNode = new Node4(value);
+
+    if (!this.root) {
+      this.root = newNode;
+      return;
+    }
+    let queue = [this.root];
+    while (queue.length) {
+      let current = queue.shift();
+      if (!current.left) {
+        current.left = newNode;
+        return;
+      } else {
+        queue.push(current.left);
+      }
+
+      if (!current.right) {
+        current.right = newNode;
+        return;
+      } else {
+        queue.push(current.right);
       }
     }
   }
