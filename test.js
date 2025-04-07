@@ -1,28 +1,17 @@
-class Node {
+class Node1{
     constructor(value){
         this.value = value;
-        this.next = null
+        this.next = null;
     }
 }
 
-class singlyLinkedList {
+class SinglyLinkedList {
     constructor(){
         this.head = null;
-        this.tail = null
-    }
-
-    insertAtStart(value){
-        let newNode = new Node(value)
-        if(!this.head){
-            this.head = newNode;
-            this.tail = newNode;
-            return
-        }
-        newNode.next = this.head;
-        this.head = newNode
+        this.tail = null;
     }
     insertAtEnd(value){
-        let newNode = new Node(value)
+        const newNode = new Node1(value)
         if(!this.head){
             this.head = newNode;
             this.tail = newNode;
@@ -31,24 +20,43 @@ class singlyLinkedList {
         this.tail.next = newNode
         this.tail = newNode
     }
+    insertAtStart(value){
+        const newNode = new Node1(value)
+        if(!this.head){
+            this.head = newNode;
+            this.tail = newNode;
+            return
+        }
+        newNode.next = this.head
+        this.head = newNode
+    }
 }
 
 class Node2{
-    constructor(data){
-        this.data = data;
+    constructor(value) {
+        this.value = value;
         this.next = null;
         this.prev = null;
     }
 }
-
 class DoublyLinkedList{
     constructor(){
-        this.head = null
+        this.head = null;
         this.tail = null
     }
-
-    insertAtEnd(data){
-        let newNode = new Node2(data)
+    insertAtStart(value){
+        const newNode = new Node2(value)
+        if(!this.head){
+            this.head = newNode;
+            this.tail = newNode;
+            return
+        }
+        newNode.next = this.head
+        this.head.prev = newNode
+        this.head = newNode
+    }
+    insertAtEnd(value){
+        const newNode = new Node2(value)
         if(!this.head){
             this.head = newNode;
             this.tail = newNode;
@@ -56,18 +64,6 @@ class DoublyLinkedList{
         }
         this.tail.next = newNode
         newNode.prev = this.tail
-        this.tail = newNode;
-    }
-
-    insertAtStart(data){
-        let newNode = new Node2(data)
-        if(!this.head){
-            this.head = newNode;
-            this.tail = newNode
-            return
-        }
-        newNode.next = this.head
-        this.head.prev = newNode
-        this.head = newNode
+        this.tail = newNode
     }
 }
