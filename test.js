@@ -174,34 +174,74 @@ class Tree {
       return;
     }
 
-    const parent = findParent(this.root, parent_value);
+    const parent = this.findParent(this.root, parent_value);
     if (!parent) {
       console.error(`couldn't find parent with value ${parent_value}`);
       return;
     }
     parent.childrens.push(newNode);
+  }
 
-    function findParent(node, parent) {
-      if (!node) return null;
+  findParent(node, parent) {
+    if (!node) return null;
 
-      if (node.value == parent) {
-        return node;
-      }
+    if (node.value == parent) {
+      return node;
+    }
 
-      for (let child of node.childrens) {
-        let result = findParent(child, parent);
-        if (result) return result;
-      }
-      return null;
+    for (let child of node.childrens) {
+      let result = this.findParent(child, parent);
+      if (result) return result;
+    }
+    return null;
+  }
+
+  bfs(){
+
+    let queue = [this.root]
+
+    while(queue.length){
+        let current = queue.shift()
+        console.log(current.value);
+        queue.push(...current.childrens)
+    }
+  }
+
+  dfs(node = this.root){
+    console.log(node.value);
+
+    for(let child of node.childrens){
+        this.dfs(child)
     }
   }
 }
 
-const tree = new Tree()
+const tree = new Tree();
 
-tree.insert('A', 'A')
-tree.insert('A', 'B')
-tree.insert('A', 'C')
-tree.insert('A', 'D')
-tree.insert('C', 'F')
-tree.insert('C', 'G')
+
+/*
+     A
+   / | \
+  B  C  D
+ /  / \  \
+H  F   G  I
+
+*/
+tree.insert(null, "A");
+tree.insert("A", "B");
+tree.insert("A", "C");
+tree.insert("A", "D");
+
+tree.insert("C", "F");
+
+tree.insert('D', 'I')
+
+tree.insert("C", "G");
+
+tree.insert('B', 'H')
+
+console.log('Bredth first search');
+tree.bfs()
+
+console.log('Depth first search');
+tree.dfs()
