@@ -151,3 +151,57 @@ class BinaryTree {
     }
   }
 }
+
+// Tree
+
+class Node5 {
+  constructor(value) {
+    this.value = value;
+    this.childrens = [];
+  }
+}
+
+class Tree {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(parent_value, value) {
+    const newNode = new Node5(value);
+
+    if (!this.root) {
+      this.root = newNode;
+      return;
+    }
+
+    const parent = findParent(this.root, parent_value);
+    if (!parent) {
+      console.error(`couldn't find parent with value ${parent_value}`);
+      return;
+    }
+    parent.childrens.push(newNode);
+
+    function findParent(node, parent) {
+      if (!node) return null;
+
+      if (node.value == parent) {
+        return node;
+      }
+
+      for (let child of node.childrens) {
+        let result = findParent(child, parent);
+        if (result) return result;
+      }
+      return null;
+    }
+  }
+}
+
+const tree = new Tree()
+
+tree.insert('A', 'A')
+tree.insert('A', 'B')
+tree.insert('A', 'C')
+tree.insert('A', 'D')
+tree.insert('C', 'F')
+tree.insert('C', 'G')
