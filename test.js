@@ -196,28 +196,26 @@ class Tree {
     return null;
   }
 
-  bfs(){
+  bfs() {
+    let queue = [this.root];
 
-    let queue = [this.root]
-
-    while(queue.length){
-        let current = queue.shift()
-        console.log(current.value);
-        queue.push(...current.childrens)
+    while (queue.length) {
+      let current = queue.shift();
+      console.log(current.value);
+      queue.push(...current.childrens);
     }
   }
 
-  dfs(node = this.root){
+  dfs(node = this.root) {
     console.log(node.value);
 
-    for(let child of node.childrens){
-        this.dfs(child)
+    for (let child of node.childrens) {
+      this.dfs(child);
     }
   }
 }
 
 const tree = new Tree();
-
 
 /*
      A
@@ -234,14 +232,50 @@ tree.insert("A", "D");
 
 tree.insert("C", "F");
 
-tree.insert('D', 'I')
+tree.insert("D", "I");
 
 tree.insert("C", "G");
 
-tree.insert('B', 'H')
+tree.insert("B", "H");
 
-console.log('Bredth first search');
-tree.bfs()
+console.log("Bredth first search");
+tree.bfs();
 
-console.log('Depth first search');
-tree.dfs()
+console.log("Depth first search");
+tree.dfs();
+
+// G r a p h
+
+class Graph {
+  constructor(size) {
+    this.size = size;
+    this.adjacencyMatrix = [];
+
+    for (let i = 0; i < size; i++) {
+      this.adjacencyMatrix[i] = [];
+      for (let j = 0; j < size; j++) {
+        this.adjacencyMatrix[i][j] = 0;
+      }
+    }
+  }
+
+  print() {
+    for (let i = 0; i < this.size; i++) {
+      for (let j = 0; j < this.size; j++) {
+        console.log(this.adjacencyMatrix[i][j]);
+      }
+      console.log("\n");
+    }
+  }
+  addEdges(source, dest) {
+    if (source >= 0 && source < this.size && dest >= 0 && dest < this.size) {
+      this.adjacencyMatrix[source][dest] = 1
+      // this.adjacencyMatrix[dest][source] = 1 // undirected graph
+    }
+  }
+}
+
+let graph = new Graph(3);
+graph.addEdges(0, 2)
+console.log("graph");
+graph.print();
