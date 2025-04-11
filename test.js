@@ -250,12 +250,32 @@ class Graph {
   constructor(size) {
     this.size = size;
     this.adjacencyMatrix = [];
+    this.adjList = new Map()
 
     for (let i = 0; i < size; i++) {
       this.adjacencyMatrix[i] = [];
       for (let j = 0; j < size; j++) {
         this.adjacencyMatrix[i][j] = 0;
       }
+    }
+  }
+
+  addVertex(vertex){
+    if(!this.adjList.has(vertex)){
+      this.adjList.set(vertex, [])
+    }
+  }
+
+  addEdge(vertex1, vertex2){
+    if(this.adjList.has(vertex1) && this.adjList.has(vertex2)){
+      this.adjList.get(vertex1).push(vertex2)
+      this.adjList.get(vertex2).push(vertex1) // undirected Graph
+    }
+  }
+
+  display(){
+    for(let [a,b] of this.adjList){
+      console.log(`vertex1 => ${a} -> ${b}`);
     }
   }
 
@@ -276,6 +296,15 @@ class Graph {
 }
 
 let graph = new Graph(3);
-graph.addEdges(0, 2)
+// graph.addEdges(0, 2)
 console.log("graph");
-graph.print();
+graph.addVertex('A')
+graph.addVertex('B')
+graph.addVertex('C')
+graph.addVertex('D')
+graph.addEdge('A','D')
+graph.addEdge('B','D')
+graph.addEdge('B','C')
+graph.addEdge('C','A')
+graph.display()
+// graph.print();
